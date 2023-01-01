@@ -19,6 +19,13 @@ public class CategoriesDao extends BaseDao {
 		return list;
 	}
 	
+	public List<Categories> GetDataCategoriesName() {
+		List<Categories> list = new ArrayList<Categories>();
+		String sql = "SELECT * FROM categories";
+		list = _jdbcTemplate.query(sql, new MapperCategories());
+		return list;
+	}
+	
 //	public static void main(String[] args) {
 //		SlidesDao homeDao = new SlidesDao();
 //		List<Slides> list = homeDao.GetDataSlide();					

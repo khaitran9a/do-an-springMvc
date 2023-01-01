@@ -16,7 +16,7 @@ Body Section
 			</ul>
 			<div class="well well-small">
 				<h1>
-					Giỏ hàng <small class="pull-right"> 2 sản phẩm trong giỏ hàng </small>
+					Giỏ hàng <small class="pull-right"> ${ TotalQuantityCart } sản phẩm trong giỏ hàng </small>
 				</h1>
 				<hr class="soften" />
 
@@ -37,35 +37,57 @@ Body Section
 						
 				<c:forEach var="item" items="${ Cart }">
 					<tr>
-	                  <td><img width="100" src="<c:url value="/assets/user/img/products/${ item.value.product.img }"/>" alt=""></td>
+	                  <td><img width="100" src="<c:url value="/assets/user/img/products/${ item.value.product.image }"/>" alt=""></td>
 	                  <td>${ item.value.product.title }</td>
-	                  <td><span class="shopBtn" style="background-color: yellow;"><span class="icon-ok"></span></span> </td>
-	                  <td><fmt:formatNumber type="number" groupingUsed="true" value="${ TotalPriceCart }"/> ₫</td>
+	                  <td><span class="shopBtn" style="background-color: ${item.value.product.code_color};"><span class="icon-ok"></span></span> </td>
+	                  <td><fmt:formatNumber type="number" groupingUsed="true" value="${  item.value.product.price }"/> ₫</td>
 	                  <td>
-						<input type="number" min="0" max="1000" class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text" value="${ item.value.quanty }">
+						<input type="number" min="0" max="1000" class="span1" style="max-width:34px" id ="quantity-cart-${ item.key }" placeholder="" size="16" type="text" value="${ item.value.quantity }">
 					  </td>
 	                  <td>
-	                  	<a href="<c:url value = "/EditCart/1"/>" type="button" class="btn btn-mini btn-danger">
+	                  	<button data-id ="${ item.key }"  type="button" class="btn btn-mini btn-danger edit-cart" ">
 	                  		<span class="icon-edit"></span>
-	                  	</a>
+	                  	</button>
 	                  </td>
 	                  <td>
-	                  	<a  href="<c:url value = "/EditCart/1"/>" class="btn btn-mini btn-danger"  type="button">
+	                  	<a  href="<c:url value = "/DeleteCart/${ item.key }"/>" class="btn btn-mini btn-danger"  type="button">
 	                  		<span class="icon-remove"></span>
 	                  	</a>
 	                  </td>
-	                  <td><fmt:formatNumber type="number" groupingUsed="true" value="${ item.value.totalPrice }"/> ₫</td>
+	                  <td><fmt:formatNumber type="number" groupingUsed="true" value="${ item.value.totalprice }"/> ₫</td>
 	                </tr>
 				</c:forEach>
+				<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th>Tổng giỏ hàng: </th>
+							<th><fmt:formatNumber type="number" groupingUsed="true" value="${ TotalPriceCart }"/> ₫ </th>
+						</tr>
 					</tbody>
 				</table>
 				<br />
-				<a href="products.html" class="shopBtn btn-large"><span
+				<a href="./" class="shopBtn btn-large"><span
 					class="icon-arrow-left"></span> Tiếp tục mua sắm </a> <a
-					href="login.html" class="shopBtn btn-large pull-right">Thanh toán <span
+					href="<c:url value="checkout"/>" class="shopBtn btn-large pull-right">Thanh toán <span
 					class="icon-arrow-right"></span></a>
 
 			</div>
 		</div>
 	</div>
+	<content tag="script">
+		<script >
+			$(".edit-cart").on("click", function() {			
+				var id = $(this).data("id");
+				var quantity = $("#quantity-cart-"+id).val();
+				alert("chỉnh sửa thành công!");
+				window.location = "EditCart/"+id +"/"+quantity;
+			});
+		</script>
+	</content>
+	
+	
 </body>

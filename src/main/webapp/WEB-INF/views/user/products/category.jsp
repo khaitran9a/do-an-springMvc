@@ -44,64 +44,104 @@
 	</div>
 
 
-	<c:if test="${ productsPaginate.size() > 0 }">
-		<div class="row-fluid">
-			<ul class="thumbnails">
+	<div class="row">
 
-				<c:forEach var="item" items="${ productsPaginate }" varStatus="loop">
-					<li class="span4">
-						<div class="thumbnail">
-							<a href="<c:url value ="/chi-tiet-san-pham/${ item.id_product }"/>" class="overlay"></a> <a
-								class="zoomTool" href="<c:url value ="/chi-tiet-san-pham/${ item.id_product }"/>" title="add to cart">"><span class="icon-search"></span>
-											QUICK VIEW</a><a
-								href="<c:url value ="/chi-tiet-san-pham/${ item.id_product }"/>"><img style="width: 276px; height: 357px" src="<c:url value="/assets/user/img/products/${ item.image }"/>" 
-								alt=""></a>
-							<div class="caption cntr">
-								<p>${ item.name }</p>
-								<p>
-									<strong> <fmt:formatNumber
-													type="number" groupingUsed="true" value="${item.price}" /> ₫</strong>
-								</p>
-								<h4>
-									<a class="shopBtn" href="#" title="add to cart"> Thêm vào giỏ hàng </a>
-								</h4>
-								<div class="actionList">
-									<a class="pull-left" href="#">Yêu thích </a> <a
-										class="pull-left" href="#"> So sánh </a>
+		<div id="sidebar" class="span3">
+			<div class="well well-small">
+				<ul class="nav nav-list">
+					<c:forEach var="item" items="${categories }">
+
+						<li><a href="<c:url value = "/san-pham/${item.id }"/>"><span
+								class="icon-circle-blank"></span> ${ item.name }</a></li>
+
+
+					</c:forEach>
+					
+					<li><a class="totalInCart" href="gio-hang"><strong>Tiền giỏ hàng <span class="badge badge-warning pull-right"
+								style="line-height: 18px;"><fmt:formatNumber
+											type="number" groupingUsed="true" value="${TotalPriceCart }" /> ₫ </span>
+						</strong></a></li>
+				</ul>
+			</div>
+
+		</div>
+
+
+		<div class="span9">
+			<c:if test="${ productsPaginate.size() > 0 }">
+				<div class="row-fluid">
+					<ul class="thumbnails">
+
+						<c:forEach var="item" items="${ productsPaginate }"
+							varStatus="loop">
+							<li class="span4">
+								<div class="thumbnail">
+									<a
+										href="<c:url value ="/chi-tiet-san-pham/${ item.id_product }"/>"
+										class="overlay"></a> <a class="zoomTool"
+										href="<c:url value ="/chi-tiet-san-pham/${ item.id_product }"/>"
+										title="add to cart">"><span class="icon-search"></span>
+										QUICK VIEW
+									</a><a
+										href="<c:url value ="/chi-tiet-san-pham/${ item.id_product }"/>"><img
+										style="width: 276px; height: 357px"
+										src="<c:url value="/assets/user/img/products/${ item.image }"/>"
+										alt=""></a>
+									<div class="caption cntr">
+										<p>${ item.name }</p>
+										<p>
+											<strong> <fmt:formatNumber type="number"
+													groupingUsed="true" value="${item.price}" /> ₫
+											</strong>
+										</p>
+										<h4>
+											<a class="shopBtn" href="#" title="add to cart"> Thêm vào
+												giỏ hàng </a>
+										</h4>
+										<div class="actionList">
+											<a class="pull-left" href="#">Yêu thích </a> <a
+												class="pull-left" href="#"> So sánh </a>
+										</div>
+										<br class="clr">
+									</div>
 								</div>
-								<br class="clr">
-							</div>
-						</div>
-					</li>
+							</li>
 
-				<c:if
-					test="${ (loop.index + 1) % 3 == 0 || (loop.index + 1)  == productsPaginate.size() }">
+							<c:if
+								test="${ (loop.index + 1) % 3 == 0 || (loop.index + 1)  == productsPaginate.size() }">
 					</ul>
 				</div>
-					<c:if test="${ (loop.index + 1) < productsPaginate.size() }">
-						<div class="row-fluid">
-							<ul class="thumbnails">
-					</c:if>
+				<c:if test="${ (loop.index + 1) < productsPaginate.size() }">
+					<div class="row-fluid">
+						<ul class="thumbnails">
 				</c:if>
-	
-		</c:forEach>
+			</c:if>
 
-	</c:if>
+			</c:forEach>
+
+			</c:if>
+		</div>
+	</div>
 
 
 	<div class="pagination">
-	<c:forEach var="item" begin = "1" end = "${ paginateInfo.totalPage }" varStatus="loop">
-		<c:if test="${ (loop.index) == paginateInfo.currentPage }">
-			<a href="<c:url value ="/san-pham/${ idCategory }/${ loop.index }"/>" class="active">${ loop.index }</a>	
-		</c:if>
-		
-		<c:if test="${ (loop.index) != paginateInfo.currentPage }">
-			<a href="<c:url value ="/san-pham/${ idCategory }/${ loop.index }"/>" class="">${ loop.index }</a>	
-		</c:if>
+		<c:forEach var="item" begin="1" end="${ paginateInfo.totalPage }"
+			varStatus="loop">
+			<c:if test="${ (loop.index) == paginateInfo.currentPage }">
+				<a
+					href="<c:url value ="/san-pham/${ idCategory }/${ loop.index }"/>"
+					class="active">${ loop.index }</a>
+			</c:if>
 
-	</c:forEach>
-	
-	
+			<c:if test="${ (loop.index) != paginateInfo.currentPage }">
+				<a
+					href="<c:url value ="/san-pham/${ idCategory }/${ loop.index }"/>"
+					class="">${ loop.index }</a>
+			</c:if>
+
+		</c:forEach>
+
+
 	</div>
 </body>
 

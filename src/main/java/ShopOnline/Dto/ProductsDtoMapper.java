@@ -25,6 +25,7 @@ public class ProductsDtoMapper implements RowMapper<ProductsDto> {
 		products.setImage(rs.getString("image"));
 		products.setCreated_at(rs.getDate("created_at"));
 		products.setUpdated_at(rs.getDate("updated_at"));
+		products.setName_category(rs.getString("name_category"));
 		return products;
 	}
 

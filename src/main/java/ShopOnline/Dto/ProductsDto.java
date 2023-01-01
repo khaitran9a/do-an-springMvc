@@ -1,6 +1,5 @@
 package ShopOnline.Dto;
 
-
 import java.sql.Date;
 
 public class ProductsDto {
@@ -20,6 +19,7 @@ public class ProductsDto {
 	private String image;
 	private Date created_at;
 	private Date updated_at;
+	private String name_category;
 	
 	public ProductsDto() {
 		super();
@@ -39,6 +39,14 @@ public class ProductsDto {
 
 	public void setId_category(int id_category) {
 		this.id_category = id_category;
+	}
+
+	public String getName_category() {
+		return name_category;
+	}
+
+	public void setName_category(String name_category) {
+		this.name_category = name_category;
 	}
 
 	public String getSizes() {
